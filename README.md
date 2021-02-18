@@ -3,6 +3,7 @@
 Flutter Weather App Demo.
 
 ## Todos
+- Add live latitude and longitide locator*
 - Parse more data from Openweather api eg pressure, wind, humidity
 - Additional styling & polish of UI
 ## Credits
