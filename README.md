@@ -6,3 +6,4 @@ Flutter Weather App Demo.
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 - [online documentation](https://flutter.dev/docs), which offers tutorials,
 - [Packt](https://www.packtpub.com)
+- [OpenWeather API] (https://openweathermap.org/)
