@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,18 +29,61 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Text("Empty Flutter Project",
-        style: TextStyle(fontSize: 25),)
-      )
-    );
+        backgroundColor: Colors.blue[100],
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: Container(
+          padding: EdgeInsets.all(60.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              dateWidget,
+              temperatureWidget
+            ],
+          ),
+        ));
   }
 }
+
+// Widgets - export to seperate file
+Widget dateWidget = Container(
+  child: Text(
+    DateFormat('MMMM d, H:mm').format(DateTime.now()),
+    style: TextStyle(
+        color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 24),
+  ),
+);
+
+Widget temperatureWidget = Container(
+  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+  child: Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text('20', // temperature
+      style: TextStyle(fontSize: 74,color: Colors.blueAccent),),
+      // Text('\u2103',style: TextStyle(fontSize: 74,color: Colors.blueAccent)),
+      Expanded(
+            child: Container(
+              padding: EdgeInsets.only(
+                top: 12.0,
+              ),
+              margin: EdgeInsets.only(
+                left: 6.0,
+              ),
+              child: Text(
+                '\u2103', // celsius unicode
+                style: TextStyle(
+                  fontSize: 24.0,
+                  color: Colors.blueAccent
+                ),
+              ),
+            ),
+          ),
+      Image.asset('images/cloudy.png', width: 80, height: 80, fit: BoxFit.cover,)
+    ],
+  ),
+);
