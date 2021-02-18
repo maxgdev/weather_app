@@ -1,21 +1,25 @@
 // Widgets file
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_app/weather_model.dart';
 
-Widget dateWidget = Container(
+dateWidget(WeatherModel data){
+  return  Container(
   child: Text(
     DateFormat('MMMM d, H:mm').format(DateTime.now()),
     style: TextStyle(
         color: Colors.blueAccent, fontWeight: FontWeight.bold, fontSize: 24),
   ),
 );
+} 
 
-Widget temperatureWidget = Container(
+temperatureWidget(WeatherModel data) {
+  return Container(
   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
   child: Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Text('20', // temperature
+      Text(data.temp.toStringAsFixed(0), // temperature
       style: TextStyle(fontSize: 74,color: Colors.blueAccent),),
       Expanded(
             child: Container(
@@ -34,7 +38,8 @@ Widget temperatureWidget = Container(
               ),
             ),
           ),
-      Image.asset('images/cloudy.png', 
+      Image.network(
+            'https://openweathermap.org/img/w/${data.icon}.png', 
       width: 80, 
       height: 80, 
       fit: BoxFit.cover,
@@ -42,20 +47,22 @@ Widget temperatureWidget = Container(
     ],
   ),
 );
+}  
 
-    Widget descriptionWidget = Container(
+descriptionWidget(WeatherModel data){
+  return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Accra',
+          Text(data.name,
             style: TextStyle(
               fontSize: 28.0,
               fontWeight: FontWeight.bold,
               color: Colors.blueAccent,
             ),
           ),
-          Text('Cloudy',
+          Text(data.main,
             style: TextStyle(
               fontSize: 28.0,
               color: Colors.blueAccent,
@@ -64,3 +71,4 @@ Widget temperatureWidget = Container(
         ],
       ),
     );
+} 

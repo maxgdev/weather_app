@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'package:intl/intl.dart';
+import 'package:weather_app/weather_model.dart';
 import './weather.dart';
+import './http_api_request.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -29,6 +31,28 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  WeatherModel _weatherData;
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentLocation();
+  }
+
+  getCurrentLocation() {
+    loadWeather(lat: 51.5085, lon: -0.1257);
+    // loadWeather(lat: 40.71, lon: -74.01);
+    print('----Getting http data----');
+  }
+
+  loadWeather({double lat, double lon}) async {
+    HttpApiRequest myRequest = HttpApiRequest.getInstance();
+    final data = await myRequest.getWeather(lat: lat, lon: lon);
+    setState(() {
+      this._weatherData = data;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,15 +62,23 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         body: Container(
           padding: EdgeInsets.all(60.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              dateWidget,
-              temperatureWidget,
-              descriptionWidget
-            ],
-          ),
+          child: _weatherData != null
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    dateWidget(_weatherData),
+                    temperatureWidget(_weatherData),
+                    descriptionWidget(_weatherData),
+                  ],
+                )
+              : Center(
+                  child: Container(
+                  margin: EdgeInsets.all(20),
+                  child: SizedBox(
+                    width: 100, 
+                    height: 100,
+                    child: CircularProgressIndicator(strokeWidth: 5.0,))
+                )),
         ));
   }
 }
-
