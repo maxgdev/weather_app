@@ -40,8 +40,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   getCurrentLocation() {
-    loadWeather(lat: 51.5085, lon: -0.1257);
-    // loadWeather(lat: 40.71, lon: -74.01);
+    // loadWeather(lat: 51.5085, lon: -0.1257); // London
+    loadWeather(lat: 6.465422, lon: 3.406448); // Lagos
+    // loadWeather(lat: 40.71, lon: -74.01); // New York
     print('----Getting http data----');
   }
 
